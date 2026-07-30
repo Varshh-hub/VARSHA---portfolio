@@ -1298,13 +1298,41 @@ body::before {
 ========================================================= */
 
 .toolbox {
-  gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    padding: 35px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    transition: transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.toolbox:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
 }
 
 .toolbox span {
-  padding: 12px 18px;
+    padding: 12px 18px;
+    font-size: 0.75rem;
 
-  font-size: 0.75rem;
+    border: 1px solid var(--border);
+    background: #141414;
+    color: #aaa;
+
+    transition: all 0.3s ease;
+}
+
+.toolbox span:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.05);
 }
 
 
