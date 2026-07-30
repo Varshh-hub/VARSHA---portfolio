@@ -1313,12 +1313,9 @@ body::before {
 ========================================================= */
 
 .certifications-grid {
-  display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 10px;
+    grid-template-columns: 1fr;
 }
+
 
 .certifications-grid article {
   min-height: 160px;
@@ -1565,9 +1562,7 @@ footer p {
 
 .reveal {
   opacity: 0;
-
   transform: translateY(45px);
-
   transition:
     opacity 0.8s ease,
     transform 0.8s ease;
@@ -1575,9 +1570,17 @@ footer p {
 
 .reveal.active {
   opacity: 1;
-
   transform: translateY(0);
 }
+
+/* Make sure important content remains visible on small screens */
+@media (max-width: 700px) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 
 
 /* =========================================================
@@ -1839,5 +1842,62 @@ footer p {
 /* 2 inches up */
 .skills-grid {
     transform: translateY(-190px);
+}
+
+/* =========================================================
+   CERTIFICATE RESPONSIVE FIX
+========================================================= */
+
+.certificate-card {
+  overflow: hidden;
+}
+
+.certificate-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+.certificate-info {
+  padding-top: 12px;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .certifications-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .certificate-card img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .certifications-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .certificate-card {
+    width: 100%;
+    min-height: auto;
+    padding: 12px;
+  }
+
+  .certificate-card img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .certificate-info {
+    padding-top: 10px;
+  }
 }
 
