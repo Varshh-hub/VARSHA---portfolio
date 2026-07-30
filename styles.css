@@ -1844,9 +1844,6 @@ footer p {
     transform: translateY(-190px);
 }
 
-/* =========================================================
-   CERTIFICATE RESPONSIVE FIX
-========================================================= */
 
 .certificate-card {
   overflow: hidden;
@@ -1864,40 +1861,8 @@ footer p {
   padding-top: 12px;
 }
 
-/* Tablet */
-@media (max-width: 1000px) {
-  .certifications-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .certificate-card img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-  .certifications-grid {
-    grid-template-columns: 1fr;
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-  }
-
-  .certificate-card {
-    width: 100%;
-    min-height: auto;
-    padding: 12px;
-  }
-
-  .certificate-card img {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  .certificate-info {
-    padding-top: 10px;
-  }
 }
-
