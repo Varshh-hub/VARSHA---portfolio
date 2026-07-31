@@ -14,9 +14,9 @@ const roles = [
   "Junior Data Scientist",
   "Python Developer",
   "Machine Learning Engineer",
-  "Data Analytics",
-  "Automation & Web Scraping",
-  "SQL & Power BI"
+  "Data Analyst",
+  "Web Scraping and Automation expert",
+  "SQL & Power BI expert"
 ];
 
 let roleIndex = 0;
