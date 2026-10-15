@@ -11,12 +11,17 @@
 const typingText = document.getElementById("typingText");
 
 const roles = [
-  "Junior Data Scientist",
-  "Python Developer",
-  "Machine Learning Engineer",
-  "Data Analyst",
-  "Web Scraping and Automation expert",
-  "SQL & Power BI expert"
+  "Aspiring Data Scientist",
+  "Aspiring ML Engineer",
+  "Aspiring DL Engineer",
+  "Aspiring NLP Engineer",
+  "Aspiring CV Engineer",
+  "Aspiring GenAI Engineer",
+  "Aspiring LLM Engineer",
+  "Aspiring AI Engineer",
+  "Aspiring Python Developer",
+  "Aspiring Data Analyst",
+  "Web Scraping Enthusiast",
 ];
 
 let roleIndex = 0;
