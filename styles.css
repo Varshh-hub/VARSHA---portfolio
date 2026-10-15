@@ -1424,6 +1424,79 @@ footer p {
   transform: translateY(-190px);
 }
 
+
+
+/* ==========================================
+   FINAL SPACING AND HOVER FIX
+========================================== */
+
+/* Space between the last certificate and Career Objective */
+#certifications {
+  padding-bottom: 65px;
+}
+
+#objective {
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+/* Career Objective: glow only on hover */
+.objective-card {
+  border: 1px solid var(--border) !important;
+  box-shadow: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.objective-card:hover {
+  border-color: var(--hover-gold) !important;
+  box-shadow: 0 0 22px rgba(255, 213, 79, 0.15);
+}
+
+/* Small gap between Career Objective and Why Hire Me */
+#strengths {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+/* Small gap between Why Hire Me and Let's Connect */
+#contact {
+  padding-top: 20px;
+}
+
+/* Let's Connect: glow only on hover */
+.contact-card {
+  border: 1px solid var(--border) !important;
+  box-shadow: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  border-color: var(--hover-gold) !important;
+  box-shadow: 0 0 22px rgba(255, 213, 79, 0.15);
+}
+
+/* Mobile spacing */
+@media (max-width: 700px) {
+  #certifications {
+    padding-bottom: 40px;
+  }
+
+  #objective {
+    padding-top: 25px;
+    padding-bottom: 20px;
+  }
+
+  #strengths {
+    padding-top: 20px;
+    padding-bottom: 15px;
+  }
+
+  #contact {
+    padding-top: 15px;
+  }
+}
+
+
 /* ACCESSIBILITY */
 
 @media (prefers-reduced-motion: reduce) {
