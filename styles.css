@@ -1430,73 +1430,38 @@ footer p {
    FINAL SPACING AND HOVER FIX
 ========================================== */
 
-/* Space between the last certificate and Career Objective */
-#certifications {
-  padding-bottom: 65px;
+/* Compact section spacing */
+section:has(.certifications-grid) {
+    padding-bottom: 10px !important;
 }
 
-#objective {
-  padding-top: 35px;
-  padding-bottom: 35px;
+section:has(.objective-card) {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
-/* Career Objective: glow only on hover */
-.objective-card {
-  border: 1px solid var(--border) !important;
-  box-shadow: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+section:has(.strength-grid) {
+    padding-top: 10px !important;
+    padding-bottom: 8px !important;
 }
 
-.objective-card:hover {
-  border-color: var(--hover-gold) !important;
-  box-shadow: 0 0 22px rgba(255, 213, 79, 0.15);
+section:has(.contact-card) {
+    padding-top: 8px !important;
 }
 
-/* Small gap between Career Objective and Why Hire Me */
-#strengths {
-  padding-top: 30px;
-  padding-bottom: 20px;
-}
-
-/* Small gap between Why Hire Me and Let's Connect */
-#contact {
-  padding-top: 20px;
-}
-
-/* Let's Connect: glow only on hover */
+/* Gold glow only on hover */
+.objective-card,
 .contact-card {
-  border: 1px solid var(--border) !important;
-  box-shadow: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
+.objective-card:hover,
 .contact-card:hover {
-  border-color: var(--hover-gold) !important;
-  box-shadow: 0 0 22px rgba(255, 213, 79, 0.15);
+    border-color: var(--hover-gold) !important;
+    box-shadow: 0 0 14px rgba(255, 213, 79, 0.2) !important;
 }
-
-/* Mobile spacing */
-@media (max-width: 700px) {
-  #certifications {
-    padding-bottom: 40px;
-  }
-
-  #objective {
-    padding-top: 25px;
-    padding-bottom: 20px;
-  }
-
-  #strengths {
-    padding-top: 20px;
-    padding-bottom: 15px;
-  }
-
-  #contact {
-    padding-top: 15px;
-  }
-}
-
-
 /* ACCESSIBILITY */
 
 @media (prefers-reduced-motion: reduce) {
