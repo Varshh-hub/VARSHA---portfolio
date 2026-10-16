@@ -1462,6 +1462,150 @@ section:has(.contact-card) {
     border-color: var(--hover-gold) !important;
     box-shadow: 0 0 14px rgba(255, 213, 79, 0.2) !important;
 }
+
+
+
+/* ==========================================
+   COMPACT PORTFOLIO SPACING FIX
+   Add at the VERY END of style.css
+========================================== */
+
+/* Reduce space between all sections */
+.section {
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+/* Reduce space between section titles and content */
+.section-heading {
+    margin-bottom: 30px;
+}
+
+/* Keep the hero from taking excessive height */
+.hero {
+    min-height: calc(100vh - 90px);
+    gap: 45px;
+}
+
+/* Reduce large gaps inside cards */
+.skill-category,
+.project-card {
+    padding: 25px;
+}
+
+.project-card {
+    min-height: 320px;
+}
+
+.project-card-featured {
+    min-height: 360px;
+}
+
+/* Reduce space before project titles */
+.project-meta {
+    margin-bottom: 25px;
+}
+
+/* Compact education cards */
+.timeline-item {
+    margin-bottom: 22px;
+}
+
+.timeline-content {
+    padding: 20px;
+}
+
+/* Compact snapshot cards */
+.snapshot-card {
+    min-height: 190px;
+    padding: 22px;
+}
+
+.snapshot-card strong {
+    margin-top: 25px;
+}
+
+/* Reduce space within skills cards */
+.skill-category h3 {
+    margin: 12px 0;
+}
+
+/* Compact learning, objective and contact cards */
+.learning-card {
+    padding: 35px;
+    gap: 30px;
+}
+
+.objective-card {
+    padding: 40px;
+}
+
+.contact-card {
+    padding: 40px;
+    gap: 30px;
+}
+
+/* Reduce large gaps between card grids */
+.snapshot-grid,
+.skills-category-grid {
+    margin-bottom: 25px;
+}
+
+/* Keep footer compact */
+footer {
+    padding: 25px 0;
+}
+
+/* Mobile spacing */
+@media (max-width: 700px) {
+    .section {
+        padding: 35px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 22px;
+    }
+
+    .hero {
+        padding-top: 35px;
+        gap: 25px;
+    }
+
+    .hero-visual {
+        min-height: 420px;
+    }
+
+    .skill-category,
+    .project-card {
+        padding: 22px;
+    }
+
+    .project-card,
+    .project-card-featured {
+        min-height: auto;
+    }
+
+    .timeline-item {
+        gap: 15px;
+        margin-bottom: 18px;
+    }
+
+    .timeline-content {
+        padding: 18px;
+    }
+
+    .learning-card,
+    .objective-card,
+    .contact-card {
+        padding: 25px 20px;
+    }
+
+    .snapshot-card {
+        min-height: 165px;
+    }
+}
+
+
 /* ACCESSIBILITY */
 
 @media (prefers-reduced-motion: reduce) {
