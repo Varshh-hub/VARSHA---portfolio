@@ -1641,6 +1641,30 @@ section:has(.strength-grid) {
   padding-top: 85px !important;
 }
 
+/* Scroll reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
 /* Keep the separation balanced on smaller screens. */
 @media (max-width: 700px) {
   section:has(.objective-card) {
