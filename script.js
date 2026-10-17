@@ -73,46 +73,35 @@ if (typingText) {
 
 const revealElements = document.querySelectorAll(".reveal");
 
-const prefersReducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-).matches;
-
-if ("IntersectionObserver" in window && !prefersReducedMotion) {
+if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        const element = entry.target;
-
         if (entry.isIntersecting) {
-          // Restart the animation whenever the element re-enters view.
-          element.classList.remove("active");
-
-          // Force the browser to restart the CSS animation.
-          void element.offsetWidth;
-
-          element.classList.add("active");
+          entry.target.classList.add("active");
         } else {
-          // Remove the active class so it can animate again.
-          element.classList.remove("active");
+          entry.target.classList.remove("active");
         }
       });
     },
     {
       threshold: 0.12,
-      rootMargin: "0px 0px -30px 0px"
+      rootMargin: "0px 0px -40px 0px"
     }
   );
 
   revealElements.forEach((element) => {
+    // Start hidden, then reveal only when scrolled into view.
+    element.classList.remove("active");
     revealObserver.observe(element);
   });
 } else {
-  // Keep content visible if IntersectionObserver is unavailable
-  // or the visitor prefers reduced motion.
+  // Fallback for older browsers.
   revealElements.forEach((element) => {
     element.classList.add("active");
   });
 }
+
 
 
 /* =========================================================
