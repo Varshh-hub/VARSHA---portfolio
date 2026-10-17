@@ -1618,3 +1618,42 @@ footer {
     transition-duration: 0.01ms !important;
   }
 }
+/* ==========================================
+   FINAL SECTION SPACING FIX
+   Adds clear separation between WHY HIRE ME
+   and LET'S CONNECT without changing the design.
+========================================== */
+
+/* Keep the objective section compact but readable. */
+section:has(.objective-card) {
+  padding-top: 35px !important;
+  padding-bottom: 35px !important;
+}
+
+/* Add breathing room after the WHY HIRE ME cards. */
+section:has(.strength-grid) {
+  padding-top: 35px !important;
+  padding-bottom: 85px !important;
+}
+
+/* The contact section itself has id="contact" and class="contact-card". */
+#contact {
+  padding-top: 85px !important;
+}
+
+/* Keep the separation balanced on smaller screens. */
+@media (max-width: 700px) {
+  section:has(.objective-card) {
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+  }
+
+  section:has(.strength-grid) {
+    padding-top: 25px !important;
+    padding-bottom: 45px !important;
+  }
+
+  #contact {
+    padding-top: 45px !important;
+  }
+}
