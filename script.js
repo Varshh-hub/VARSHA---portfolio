@@ -1,3 +1,4 @@
+
 /* =========================================================
    VARSHA A PORTFOLIO
    JAVASCRIPT INTERACTIONS
@@ -21,206 +22,168 @@ const roles = [
   "Aspiring AI Engineer",
   "Aspiring Python Developer",
   "Aspiring Data Analyst",
-  "Web Scraping Enthusiast",
+  "Web Scraping Enthusiast"
 ];
 
 let roleIndex = 0;
 let characterIndex = 0;
-
 let isDeleting = false;
 
 function typeRole() {
+  if (!typingText) return;
 
   const currentRole = roles[roleIndex];
 
   if (!isDeleting) {
-
     typingText.textContent =
       currentRole.substring(0, characterIndex + 1);
 
     characterIndex++;
 
     if (characterIndex === currentRole.length) {
-
       isDeleting = true;
-
       setTimeout(typeRole, 1500);
-
       return;
     }
-
   } else {
-
     typingText.textContent =
       currentRole.substring(0, characterIndex - 1);
 
     characterIndex--;
 
     if (characterIndex === 0) {
-
       isDeleting = false;
-
-      roleIndex++;
-
-      if (roleIndex >= roles.length) {
-        roleIndex = 0;
-      }
-
+      roleIndex = (roleIndex + 1) % roles.length;
     }
-
   }
 
   const speed = isDeleting ? 45 : 85;
-
   setTimeout(typeRole, speed);
 }
 
-typeRole();
+if (typingText) {
+  typeRole();
+}
 
 
 /* =========================================================
    SCROLL REVEAL
+   REPLAYS EVERY TIME ELEMENTS ENTER THE VIEWPORT
 ========================================================= */
 
-const revealElements =
-  document.querySelectorAll(".reveal");
+const revealElements = document.querySelectorAll(".reveal");
 
-const revealObserver =
-  new IntersectionObserver(
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+if ("IntersectionObserver" in window && !prefersReducedMotion) {
+  const revealObserver = new IntersectionObserver(
     (entries) => {
-
       entries.forEach((entry) => {
+        const element = entry.target;
 
         if (entry.isIntersecting) {
+          // Restart the animation whenever the element re-enters view.
+          element.classList.remove("active");
 
-          entry.target.classList.add("active");
+          // Force the browser to restart the CSS animation.
+          void element.offsetWidth;
 
-          revealObserver.unobserve(entry.target);
-
+          element.classList.add("active");
+        } else {
+          // Remove the active class so it can animate again.
+          element.classList.remove("active");
         }
-
       });
-
     },
     {
-      threshold: 0.12
+      threshold: 0.12,
+      rootMargin: "0px 0px -30px 0px"
     }
   );
 
-
-revealElements.forEach((element) => {
-  revealObserver.observe(element);
-});
+  revealElements.forEach((element) => {
+    revealObserver.observe(element);
+  });
+} else {
+  // Keep content visible if IntersectionObserver is unavailable
+  // or the visitor prefers reduced motion.
+  revealElements.forEach((element) => {
+    element.classList.add("active");
+  });
+}
 
 
 /* =========================================================
    MOBILE NAVIGATION
 ========================================================= */
 
-const menuToggle =
-  document.getElementById("menuToggle");
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
 
-const navMenu =
-  document.getElementById("navMenu");
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navMenu.classList.toggle("active");
 
-
-menuToggle.addEventListener("click", () => {
-
-  navMenu.classList.toggle("active");
-
-});
-
-
-/* Close mobile menu after clicking */
-
-const navLinks =
-  document.querySelectorAll(".nav a");
-
-navLinks.forEach((link) => {
-
-  link.addEventListener("click", () => {
-
-    navMenu.classList.remove("active");
-
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
   });
 
-});
+  // Close the mobile menu after clicking a navigation link.
+  const navLinks = navMenu.querySelectorAll("a");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
 
 
 /* =========================================================
    CURSOR GLOW
 ========================================================= */
 
-const cursorGlow =
-  document.querySelector(".cursor-glow");
+const cursorGlow = document.querySelector(".cursor-glow");
 
-
-document.addEventListener("mousemove", (event) => {
-
-  cursorGlow.style.left =
-    `${event.clientX}px`;
-
-  cursorGlow.style.top =
-    `${event.clientY}px`;
-
-});
+if (cursorGlow && !prefersReducedMotion) {
+  document.addEventListener("mousemove", (event) => {
+    cursorGlow.style.left = `${event.clientX}px`;
+    cursorGlow.style.top = `${event.clientY}px`;
+  });
+}
 
 
 /* =========================================================
    HERO 3D TILT
 ========================================================= */
 
-const tiltElement =
-  document.querySelector("[data-tilt]");
+const tiltElement = document.querySelector("[data-tilt]");
 
+if (tiltElement && !prefersReducedMotion) {
+  tiltElement.addEventListener("mousemove", (event) => {
+    const rect = tiltElement.getBoundingClientRect();
 
-if (tiltElement) {
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
-  tiltElement.addEventListener(
-    "mousemove",
-    (event) => {
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-      const rect =
-        tiltElement.getBoundingClientRect();
+    const rotateX = ((y - centerY) / centerY) * -4;
+    const rotateY = ((x - centerX) / centerX) * 4;
 
-      const x =
-        event.clientX - rect.left;
+    tiltElement.style.transform =
+      `perspective(1000px) rotateX(${rotateX}deg) ` +
+      `rotateY(${rotateY}deg) scale(1.01)`;
+  });
 
-      const y =
-        event.clientY - rect.top;
-
-      const centerX =
-        rect.width / 2;
-
-      const centerY =
-        rect.height / 2;
-
-      const rotateX =
-        ((y - centerY) / centerY) * -4;
-
-      const rotateY =
-        ((x - centerX) / centerX) * 4;
-
-      tiltElement.style.transform =
-        `perspective(1000px)
-         rotateX(${rotateX}deg)
-         rotateY(${rotateY}deg)
-         scale(1.01)`;
-
-    }
-  );
-
-
-  tiltElement.addEventListener(
-    "mouseleave",
-    () => {
-
-      tiltElement.style.transform =
-        "perspective(1000px) rotateX(0) rotateY(0) scale(1)";
-
-    }
-  );
-
+  tiltElement.addEventListener("mouseleave", () => {
+    tiltElement.style.transform =
+      "perspective(1000px) rotateX(0deg) " +
+      "rotateY(0deg) scale(1)";
+  });
 }
 
 
@@ -228,40 +191,20 @@ if (tiltElement) {
    CARD MOUSE EFFECT
 ========================================================= */
 
-const cards =
-  document.querySelectorAll(
-    ".project-card, .snapshot-card, .skill-category, .strength-grid article"
-  );
-
+const cards = document.querySelectorAll(
+  ".project-card, .snapshot-card, .skill-category, .strength-grid article"
+);
 
 cards.forEach((card) => {
+  card.addEventListener("mousemove", (event) => {
+    const rect = card.getBoundingClientRect();
 
-  card.addEventListener(
-    "mousemove",
-    (event) => {
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
-      const rect =
-        card.getBoundingClientRect();
-
-      const x =
-        event.clientX - rect.left;
-
-      const y =
-        event.clientY - rect.top;
-
-      card.style.setProperty(
-        "--mouse-x",
-        `${x}px`
-      );
-
-      card.style.setProperty(
-        "--mouse-y",
-        `${y}px`
-      );
-
-    }
-  );
-
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  });
 });
 
 
@@ -269,114 +212,110 @@ cards.forEach((card) => {
    ACTIVE NAV SECTION
 ========================================================= */
 
-const sections =
-  document.querySelectorAll("section[id]");
+const sections = document.querySelectorAll("section[id]");
+const navigationLinks = document.querySelectorAll(".nav a");
 
-const navigationLinks =
-  document.querySelectorAll(".nav a");
-
-
-const sectionObserver =
-  new IntersectionObserver(
+if ("IntersectionObserver" in window) {
+  const sectionObserver = new IntersectionObserver(
     (entries) => {
-
       entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-        if (entry.isIntersecting) {
+        navigationLinks.forEach((link) => {
+          link.classList.remove("active-link");
+        });
 
-          navigationLinks.forEach((link) => {
+        const activeLink = document.querySelector(
+          `.nav a[href="#${entry.target.id}"]`
+        );
 
-            link.classList.remove("active-link");
-
-          });
-
-          const activeLink =
-            document.querySelector(
-              `.nav a[href="#${entry.target.id}"]`
-            );
-
-          if (activeLink) {
-
-            activeLink.classList.add(
-              "active-link"
-            );
-
-          }
-
+        if (activeLink) {
+          activeLink.classList.add("active-link");
         }
-
       });
-
     },
     {
       threshold: 0.4
     }
   );
 
-
-sections.forEach((section) => {
-
-  sectionObserver.observe(section);
-
-});
+  sections.forEach((section) => {
+    sectionObserver.observe(section);
+  });
+}
 
 
 /* =========================================================
    BUTTON RIPPLE EFFECT
 ========================================================= */
 
-const buttons =
-  document.querySelectorAll(".button");
-
+const buttons = document.querySelectorAll(".button");
 
 buttons.forEach((button) => {
+  // Ensure the ripple can be positioned inside the button.
+  if (getComputedStyle(button).position === "static") {
+    button.style.position = "relative";
+  }
 
-  button.addEventListener("click", function (event) {
+  button.style.overflow = "hidden";
 
-    const ripple =
-      document.createElement("span");
+  button.addEventListener("click", (event) => {
+    if (prefersReducedMotion) return;
+
+    const rect = button.getBoundingClientRect();
+
+    const ripple = document.createElement("span");
+
+    const size = Math.max(rect.width, rect.height) * 2;
 
     ripple.style.position = "absolute";
-
-    ripple.style.width = "5px";
-    ripple.style.height = "5px";
-
+    ripple.style.width = `${size}px`;
+    ripple.style.height = `${size}px`;
     ripple.style.borderRadius = "50%";
-
-    ripple.style.background =
-      "rgba(255,255,255,0.4)";
-
-    ripple.style.left =
-      `${event.offsetX}px`;
-
-    ripple.style.top =
-      `${event.offsetY}px`;
-
+    ripple.style.background = "rgba(255, 255, 255, 0.35)";
     ripple.style.pointerEvents = "none";
+    ripple.style.transform = "translate(-50%, -50%) scale(0)";
+    ripple.style.animation = "buttonRipple 500ms ease-out forwards";
+    ripple.style.left = `${event.clientX - rect.left}px`;
+    ripple.style.top = `${event.clientY - rect.top}px`;
 
-    this.style.position = "relative";
-
-    this.style.overflow = "hidden";
-
-    this.appendChild(ripple);
+    button.appendChild(ripple);
 
     setTimeout(() => {
-
       ripple.remove();
-
-    }, 500);
-
+    }, 550);
   });
-
 });
+
+// Add the ripple animation only once.
+if (!document.getElementById("button-ripple-styles")) {
+  const rippleStyles = document.createElement("style");
+
+  rippleStyles.id = "button-ripple-styles";
+
+  rippleStyles.textContent = `
+    @keyframes buttonRipple {
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+      }
+    }
+  `;
+
+  document.head.appendChild(rippleStyles);
+}
 
 
 /* =========================================================
    PAGE LOAD
 ========================================================= */
 
-window.addEventListener("load", () => {
-
+function markPageLoaded() {
   document.body.classList.add("loaded");
+}
 
-});
+if (document.readyState === "complete") {
+  markPageLoaded();
+} else {
+  window.addEventListener("load", markPageLoaded, { once: true });
+}
