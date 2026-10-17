@@ -1655,6 +1655,41 @@ section:has(.strength-grid) {
   transform: translateY(0);
 }
 
+
+
+/* =========================================================
+   FINAL SCROLL REVEAL OVERRIDE
+   Keep content hidden until it enters the viewport.
+========================================================= */
+
+section.reveal {
+  opacity: 0 !important;
+  transform: translateY(35px) !important;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease !important;
+  will-change: opacity, transform;
+}
+
+section.reveal.active {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Mobile: keep the same scroll-triggered effect */
+@media (max-width: 700px) {
+  section.reveal {
+    opacity: 0 !important;
+    transform: translateY(25px) !important;
+  }
+
+  section.reveal.active {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+
 /* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
